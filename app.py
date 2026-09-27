@@ -10,7 +10,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS with High-Visibility Download Button & Glassmorphism UI
+# Custom CSS with High-Visibility Button Text & Glassmorphism UI
 st.markdown("""
     <style>
     /* Global Styling with Visible Cinematic Background Image */
@@ -76,10 +76,10 @@ st.markdown("""
         gap: 8px;
     }
 
-    /* Custom Gradient Buttons (Process & Download both) */
+    /* Custom Gradient Buttons with Forced White Text */
     .stButton>button, div.stDownloadButton>button {
         width: 100% !important;
-        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100% !important);
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
         color: #ffffff !important;
         border: none !important;
         padding: 16px !important;
@@ -90,11 +90,15 @@ st.markdown("""
         cursor: pointer !important;
         transition: all 0.3s ease !important;
     }
+    
+    .stButton>button *, div.stDownloadButton>button * {
+        color: #ffffff !important;
+    }
+
     .stButton>button:hover, div.stDownloadButton>button:hover {
         transform: translateY(-2px);
         box-shadow: 0 15px 30px rgba(168, 85, 247, 0.6) !important;
         background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
-        color: #ffffff !important;
     }
     
     /* File Uploader Clean-up */
