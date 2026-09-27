@@ -10,12 +10,12 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS with High-Quality Cinematic Background Image & Professional UI
+# Custom CSS with Clear Background Image & Transparent Glass Cards
 st.markdown("""
     <style>
-    /* Global Styling with Relevant Cinematic Video Background & Dark Overlay */
+    /* Global Styling with Visible Cinematic Background Image */
     .stApp {
-        background: linear-gradient(rgba(3, 7, 18, 0.88), rgba(3, 7, 18, 0.95)), 
+        background: linear-gradient(rgba(3, 7, 18, 0.65), rgba(3, 7, 18, 0.75)), 
                     url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1920&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
@@ -29,10 +29,10 @@ st.markdown("""
     .hero-container {
         text-align: center;
         padding: 2.5rem 1rem;
-        background: rgba(17, 24, 39, 0.75);
+        background: rgba(11, 15, 25, 0.65);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 20px;
         margin-bottom: 2rem;
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
@@ -46,17 +46,17 @@ st.markdown("""
         margin-bottom: 0.5rem;
     }
     .hero-subtitle {
-        color: #9ca3af;
+        color: #d1d5db;
         font-size: 1.1rem;
         font-weight: 400;
     }
 
-    /* Modern Glassmorphism Card Layout */
+    /* Transparent Glassmorphism Cards */
     .card {
-        background: rgba(17, 24, 39, 0.8);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(11, 15, 25, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 16px;
         padding: 24px;
         box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
@@ -64,12 +64,12 @@ st.markdown("""
         transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .card:hover {
-        border-color: #6366f1;
+        border-color: #818cf8;
     }
     .card-title {
         font-size: 1.2rem;
         font-weight: 700;
-        color: #f3f4f6;
+        color: #ffffff;
         margin-bottom: 1rem;
         display: flex;
         align-items: center;
@@ -98,8 +98,8 @@ st.markdown("""
     
     /* File Uploader Clean-up */
     div[data-testid="stFileUploader"] {
-        background-color: rgba(3, 7, 18, 0.6);
-        border: 2px dashed #4b5563;
+        background-color: rgba(3, 7, 18, 0.4);
+        border: 2px dashed #6b7280;
         border-radius: 12px;
         padding: 10px;
     }
@@ -134,7 +134,7 @@ with col1:
 with col2:
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown('<div class="card-title">🎵 Upload Audio File</div>', unsafe_allow_html=True)
-    audio_file = st.file_uploader("Audio", type=[".mp3", "wav", ".m4a", ".aac"], key="audio", label_visibility="collapsed")
+    audio_file = st.file_uploader("Audio", type=[".mp3", ".wav", ".m4a", ".aac"], key="audio", label_visibility="collapsed")
     if audio_file is not None:
         st.markdown("<br>", unsafe_allow_html=True)
         st.audio(audio_file)
