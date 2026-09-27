@@ -3,60 +3,63 @@ import subprocess
 import streamlit as st
 import imageio_ffmpeg
 
-# Setup page configuration for professional look
+# Setup page configuration
 st.set_page_config(
     page_title="Pro Video Audio Replacer",
     page_icon="🎬",
-    layout="centered",
-    initial_sidebar_state="collapsed"
+    layout="centered"
 )
 
-# Custom CSS for Modern Sleek UI
+# Custom CSS for Clean, High-Contrast Professional UI
 st.markdown("""
     <style>
-    .main {
-        background-color: #0f172a;
-        color: #f8fafc;
-    }
     .stApp {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        background-color: #0b0f19;
+        color: #ffffff;
     }
     h1 {
+        color: #ffffff !important;
         font-family: 'Segoe UI', sans-serif;
         font-weight: 800;
-        color: #ffffff;
         text-align: center;
-        font-size: 2.2rem;
-        margin-bottom: 0px;
+        font-size: 2.5rem;
+        margin-bottom: 5px;
     }
-    .subtitle {
+    .main-subtitle {
         text-align: center;
         color: #94a3b8;
-        font-size: 1rem;
-        margin-bottom: 30px;
+        font-size: 1.1rem;
+        margin-bottom: 35px;
     }
-    .stFileUploader {
-        background: rgba(30, 41, 59, 0.7);
-        border: 2px dashed #334155;
+    div[data-testid="stFileUploader"] {
+        background-color: #1e293b;
+        border: 2px dashed #475569;
         border-radius: 12px;
-        padding: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    div[data-testid="stFileUploader"] label {
+        color: #f8fafc !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
     }
     .stButton>button {
         width: 100%;
         background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
         color: white;
         border: none;
-        padding: 12px;
-        font-size: 16px;
-        font-weight: 600;
+        padding: 14px;
+        font-size: 17px;
+        font-weight: 700;
         border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        cursor: pointer;
         transition: all 0.3s ease;
     }
     .stButton>button:hover {
         background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
-        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.6);
-        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        transform: translateY(-2px);
     }
     </style>
 """, unsafe_allow_html=True)
@@ -68,18 +71,22 @@ os.environ["PATH"] = ffmpeg_dir + os.pathsep + os.environ.get("PATH", "")
 
 # Header Section
 st.markdown("<h1>🎬 Pro Video Audio Replacer</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>Seamlessly replace background audio in your videos with lightning-fast processing.</p>", unsafe_allow_html=True)
+st.markdown("<div class='main-subtitle'>Seamlessly replace background audio in your videos with live preview support.</div>", unsafe_allow_html=True)
 
 # Layout Columns for File Uploaders
-col1, col2 = st.columns(2, gap="medium")
+col1, col2 = st.columns(2, gap="large")
 
 with col1:
-    st.markdown("### 🎥 Video File")
-    video_file = st.file_uploader("Upload Video", type=[".mp4", ".mov", ".mkv", ".avi"], key="video")
+    video_file = st.file_uploader("🎥 Upload Video File", type=[".mp4", ".mov", ".mkv", ".avi"], key="video")
+    if video_file is not None:
+        st.markdown("##### 👁️ Video Preview")
+        st.video(video_file)
 
 with col2:
-    st.markdown("### 🎵 Audio File")
-    audio_file = st.file_uploader("Upload Audio", type=[".mp3", ".wav", ".m4a", ".aac"], key="audio")
+    audio_file = st.file_uploader("🎵 Upload Audio File", type=[".mp3", ".wav", ".m4a", ".aac"], key="audio")
+    if audio_file is not None:
+        st.markdown("##### 🔊 Audio Preview")
+        st.audio(audio_file)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -87,7 +94,6 @@ st.markdown("<br>", unsafe_allow_html=True)
 if st.button("🚀 Process & Replace Audio Now"):
     if video_file is not None and audio_file is not None:
         with st.spinner("⚡ Processing video files with FFmpeg... Please wait..."):
-            # Save uploaded files temporarily
             video_path = "temp_video.mp4"
             audio_path = "temp_audio.mp3"
             
@@ -114,6 +120,9 @@ if st.button("🚀 Process & Replace Audio Now"):
             try:
                 subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 st.success("✨ Success! Your video has been processed successfully.")
+                
+                st.markdown("### 📥 Final Output Preview")
+                st.video(output_path)
                 
                 with open(output_path, "rb") as file:
                     st.download_button(
