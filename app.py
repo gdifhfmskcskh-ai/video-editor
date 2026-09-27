@@ -10,7 +10,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS with Clear Background Image & Transparent Glass Cards
+# Custom CSS with High-Visibility Download Button & Glassmorphism UI
 st.markdown("""
     <style>
     /* Global Styling with Visible Cinematic Background Image */
@@ -76,24 +76,25 @@ st.markdown("""
         gap: 8px;
     }
 
-    /* Custom Gradient Button */
-    .stButton>button {
-        width: 100%;
-        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-        color: white;
-        border: none;
-        padding: 16px;
-        font-size: 18px;
-        font-weight: 700;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
-        cursor: pointer;
-        transition: all 0.3s ease;
+    /* Custom Gradient Buttons (Process & Download both) */
+    .stButton>button, div.stDownloadButton>button {
+        width: 100% !important;
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100% !important);
+        color: #ffffff !important;
+        border: none !important;
+        padding: 16px !important;
+        font-size: 18px !important;
+        font-weight: 700 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4) !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
     }
-    .stButton>button:hover {
+    .stButton>button:hover, div.stDownloadButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 15px 30px rgba(168, 85, 247, 0.6);
-        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+        box-shadow: 0 15px 30px rgba(168, 85, 247, 0.6) !important;
+        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
+        color: #ffffff !important;
     }
     
     /* File Uploader Clean-up */
